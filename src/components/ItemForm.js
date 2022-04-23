@@ -5,16 +5,8 @@ function ItemForm({ onItemFormSubmit }) {
   const [itemName, setItemName] = useState("")
   const [itemCategory, setItemCategory] = useState("Produce")
 
-  function handleItemNameSubmit(e) {
-    setItemName(e.target.value)
-  }
-
-  function handleItemCategorySubmit(e) {
-    setItemCategory(e.target.value)
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault()
     onItemFormSubmit({
       id: uuid(),
       name: itemName,
@@ -22,30 +14,35 @@ function ItemForm({ onItemFormSubmit }) {
     })
   }
 
+  const handleItemNameSubmit = (e) => setItemName(e.target.value)
+
+  const handleCategorySubmit = (e) => setItemCategory(e.target.value)
+
   return (
     <form className="NewItem" onSubmit={handleSubmit}>
       <label>
         Name:
-        <input
-        type="text"
-        name="name"
-        onChange={handleItemNameSubmit}
-        value={itemName}  
-      />
+        <input 
+          type="text" 
+          name="name"
+          onChange={handleItemNameSubmit}
+          value={itemName}
+        />
       </label>
 
       <label>
         Category:
-        <select
+        <select 
           name="category"
-          onChange={handleItemCategorySubmit}
+          onChange={handleCategorySubmit}
           value={itemCategory}
         >
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
         </select>
-      </label>  
+      </label>
+
       <button type="submit">Add to List</button>
     </form>
   );
